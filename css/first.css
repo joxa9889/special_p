@@ -31,7 +31,6 @@
     width: 150px;
     height: 50px;
     border-radius: 7px;
-    cursor: pointer;
 }
 
 .Yes {
@@ -65,8 +64,9 @@
     transform: rotate(12deg);
 }
 
-.no {
-    transform: rotate(0);
+.button-replaser {
+    display: none;
+    width: 150px;
 }
 
 .gif {
