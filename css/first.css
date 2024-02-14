@@ -78,3 +78,17 @@
 .gif > img {
     width: 270px;
 }
+
+@keyframes moveDown {
+    from {
+        top: 67%;
+    }
+    to {
+        top: calc(100% - 60px);
+        left: auto;
+    }
+}
+
+.move-down {
+    animation: moveDown 2s ease ; /* Adjust duration as needed */
+}

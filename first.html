@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/special_p/css/first.css">
 </head>
 <body class="body">
-    <div class="container">
-        <div clas="second-container">
+    <div class="container" id="container">
+        <div class="second-container">
             <div class="gif">
                 <img src="/special_p/img/grl.webp" alt="">
             </div>
@@ -17,10 +17,96 @@
             </div>
             <div class="buttons">
                 <button class="Yes button">Yes</button>
-                <button class="No button">No</button>
+                <div>
+                    <button id="draggableButton" class="No button">No</button>
+                </div>
+                <div id="replaser" class="button-replaser">
+                </div>
             </div>
         </div>
         
     </div>
 </body>
+<script>
+    var container = document.getElementById('container');
+    var draggableButton = document.getElementById('draggableButton');
+    var replaser = document.getElementById('replaser');
+    var containerRect = container.getBoundingClientRect();
+
+    var offsetX, offsetY;
+    var firstClick = true;
+
+    function onTouchStart(e) {
+        e.preventDefault();
+        if (firstClick) {
+            firstClick = false;
+            draggableButton.classList.add('move-down');
+            draggableButton.style.position = 'absolute';
+            var buttonRect = draggableButton.getBoundingClientRect();
+            draggableButton.style.top = (containerRect.height - draggableButton.offsetHeight) + 'px';
+            replaser.style.display = 'block';
+            return;
+        }
+        draggableButton.style.transform = 'rotate(12deg)';
+        var buttonRect = draggableButton.getBoundingClientRect();
+        var touch = e.touches[0];
+        offsetX = touch.clientX - buttonRect.left;
+        offsetY = touch.clientY - buttonRect.top;
+        document.addEventListener('touchmove', onTouchMove);
+        document.addEventListener('touchend', onTouchEnd);
+    }
+
+    function onTouchMove(e) {
+        var touch = e.touches[0];
+        var newX = touch.clientX - offsetX - containerRect.left;
+        var newY = touch.clientY - offsetY - containerRect.top;
+        newX = Math.min(Math.max(newX, 0), containerRect.width - draggableButton.offsetWidth);
+        newY = Math.min(Math.max(newY, 0), containerRect.height - draggableButton.offsetHeight);
+        draggableButton.style.left = newX + 'px';
+        draggableButton.style.top = newY + 'px';
+    }
+
+    function onTouchEnd() {
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('touchend', onTouchEnd);
+    }
+
+    function onMouseDown(e) {
+        e.preventDefault();
+        if (firstClick) {
+            firstClick = false;
+            draggableButton.classList.add('move-down');
+            draggableButton.style.position = 'absolute';
+
+            var buttonRect = draggableButton.getBoundingClientRect();
+            draggableButton.style.top = (containerRect.height - draggableButton.offsetHeight) + 'px';
+            replaser.style.display = 'block';
+            return;
+        }
+        draggableButton.style.transform = 'rotate(0deg)';
+        var buttonRect = draggableButton.getBoundingClientRect();
+        offsetX = e.clientX - buttonRect.left;
+        offsetY = e.clientY - buttonRect.top;
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    }
+
+    function onMouseMove(e) {
+        var newX = e.clientX - offsetX - containerRect.left;
+        var newY = e.clientY - offsetY - containerRect.top;
+        newX = Math.min(Math.max(newX, 0), containerRect.width - draggableButton.offsetWidth);
+        newY = Math.min(Math.max(newY, 0), containerRect.height - draggableButton.offsetHeight);
+        draggableButton.style.left = newX + 'px';
+        draggableButton.style.top = newY + 'px';
+    }
+
+    function onMouseUp() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    }
+
+    draggableButton.addEventListener('mousedown', onMouseDown);
+    draggableButton.addEventListener('touchstart', onTouchStart);
+</script>
+
 </html>
