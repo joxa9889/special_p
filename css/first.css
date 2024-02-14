@@ -31,6 +31,7 @@
     width: 150px;
     height: 50px;
     border-radius: 7px;
+    cursor: pointer;
 }
 
 .Yes {
@@ -62,6 +63,10 @@
 
 .No {
     transform: rotate(12deg);
+}
+
+.no {
+    transform: rotate(0);
 }
 
 .gif {
