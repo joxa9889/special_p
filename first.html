@@ -16,10 +16,12 @@
                 Will you be my Valentine?
             </div>
             <div class="buttons">
-                <button class="Yes button">Yes</button>
-                <div>
-                    <button id="draggableButton" class="No button">No</button>
-                </div>
+                <a href="/special_p/yes_first.html"><button class="Yes button">Yes</button></a>
+                <a href="/special_p/second.html">
+                    <div>
+                        <button id="draggableButton" class="No button">No</button>
+                    </div>
+                </a>
                 <div id="replaser" class="button-replaser">
                 </div>
             </div>
@@ -70,42 +72,43 @@
         document.removeEventListener('touchend', onTouchEnd);
     }
 
-    function onMouseDown(e) {
-        e.preventDefault();
-        if (firstClick) {
-            firstClick = false;
-            draggableButton.classList.add('move-down');
-            draggableButton.style.position = 'absolute';
+    // function onMouseDown(e) {
+    //     e.preventDefault();
+    //     if (firstClick) {
+    //         firstClick = false;
+    //         draggableButton.classList.add('move-down');
+    //         draggableButton.style.position = 'absolute';
 
-            var buttonRect = draggableButton.getBoundingClientRect();
-            draggableButton.style.top = (containerRect.height - draggableButton.offsetHeight) + 'px';
-            replaser.style.display = 'block';
-            return;
-        }
-        draggableButton.style.transform = 'rotate(0deg)';
-        var buttonRect = draggableButton.getBoundingClientRect();
-        offsetX = e.clientX - buttonRect.left;
-        offsetY = e.clientY - buttonRect.top;
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
-    }
+    //         var buttonRect = draggableButton.getBoundingClientRect();
+    //         draggableButton.style.top = (containerRect.height - draggableButton.offsetHeight) + 'px';
+    //         replaser.style.display = 'block';
+    //         return;
+    //     }
+    //     draggableButton.style.transform = 'rotate(0deg)';
+    //     var buttonRect = draggableButton.getBoundingClientRect();
+    //     offsetX = e.clientX - buttonRect.left;
+    //     offsetY = e.clientY - buttonRect.top;
+    //     document.addEventListener('mousemove', onMouseMove);
+    //     document.addEventListener('mouseup', onMouseUp);
+    //     window.location.href = "/special_p/second.html";
+    // }
 
-    function onMouseMove(e) {
-        var newX = e.clientX - offsetX - containerRect.left;
-        var newY = e.clientY - offsetY - containerRect.top;
-        newX = Math.min(Math.max(newX, 0), containerRect.width - draggableButton.offsetWidth);
-        newY = Math.min(Math.max(newY, 0), containerRect.height - draggableButton.offsetHeight);
-        draggableButton.style.left = newX + 'px';
-        draggableButton.style.top = newY + 'px';
-    }
+    // function onMouseMove(e) {
+    //     var newX = e.clientX - offsetX - containerRect.left;
+    //     var newY = e.clientY - offsetY - containerRect.top;
+    //     newX = Math.min(Math.max(newX, 0), containerRect.width - draggableButton.offsetWidth);
+    //     newY = Math.min(Math.max(newY, 0), containerRect.height - draggableButton.offsetHeight);
+    //     draggableButton.style.left = newX + 'px';
+    //     draggableButton.style.top = newY + 'px';
+    // }
 
-    function onMouseUp() {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-    }
+    // function onMouseUp() {
+    //     document.removeEventListener('mousemove', onMouseMove);
+    //     document.removeEventListener('mouseup', onMouseUp);
+    // }
 
-    draggableButton.addEventListener('mousedown', onMouseDown);
-    draggableButton.addEventListener('touchstart', onTouchStart);
+    // draggableButton.addEventListener('mousedown', onMouseDown);
+    // draggableButton.addEventListener('touchstart', onTouchStart);
 </script>
 
 </html>
